@@ -1,0 +1,1 @@
+../ackee-entrypoint.sh
