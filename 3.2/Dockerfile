@@ -15,4 +15,4 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install stackdriver-agent
 
 COPY setup_stackdriver.sh /opt/01-setup-stackdriver.sh
 
-RUN cp /entrypoint.sh /opt/04-mongo-entrypoint.sh && cp /ackee-entrypoint.sh /entrypoint.sh
+RUN cp /entrypoint.sh /opt/04-mongo-entrypoint.sh && cp /ackee-entrypoint.sh usr/local/bin/docker-entrypoint.sh
