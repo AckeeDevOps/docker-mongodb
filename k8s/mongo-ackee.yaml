@@ -26,8 +26,6 @@ spec:
         args:
           - --wiredTigerCacheSizeGB
           - '1'
-          - --replSet
-          - rs0
         resources:
           requests:
             cpu: 100m
@@ -41,7 +39,7 @@ spec:
           - name: MONGO_INITDB_ROOT_USERNAME
             value: root
           - name: MONGO_INITDB_ROOT_PASSWORD
-            value: "b90-80FF435_0##2x2"
+            value: "nicepassword"
 ---
 apiVersion: v1
 kind: Service
