@@ -1,6 +1,6 @@
 # Ackee MongoDB image with Stackdriver integration
 
-This docker image is desinged to be run inside [GKE](https://cloud.google.com/kubernetes-engine/). It is based upon official [Docker Mongo image](https://hub.docker.com/_/mongo/) with Stackdriver agent preinstalled.
+This docker image is designed to be run inside [GKE](https://cloud.google.com/kubernetes-engine/). It is based upon official [Docker Mongo image](https://hub.docker.com/_/mongo/) with Stackdriver agent preinstalled.
 
 ## Examples
 
