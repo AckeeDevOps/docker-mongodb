@@ -11,31 +11,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: mongo
-  labels:
-    name: mongo
-spec:
-  ports:
-  - port: 27017
-    targetPort: 27017
-  clusterIP: None
-  selector:
-    role: mongo
----
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: mongo
+  name: mongo-ackee
 spec:
   serviceName: "mongo"
   replicas: 3
   template:
     metadata:
       labels:
-        role: mongo
+        role: mongo-ackee
         environment: test
     spec:
       terminationGracePeriodSeconds: 10
@@ -77,3 +63,17 @@ metadata:
 provisioner: kubernetes.io/gce-pd
 parameters:
   type: pd-ssd
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-ackee
+  labels:
+    name: mongo-ackee
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017
+  clusterIP: None
+  selector:
+    role: mongo-ackee
