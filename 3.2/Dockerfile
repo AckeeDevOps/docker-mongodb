@@ -14,6 +14,6 @@ RUN apt-get -qq update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install stackdriver-agent
 RUN rm -rf /var/lib/apt/lists/*
 
-COPY setup_stackdriver.sh /opt/01-setup-stackdriver.sh
+#COPY setup_stackdriver.sh /opt/01-setup-stackdriver.sh
 
 RUN cp /entrypoint.sh /opt/04-mongo-entrypoint.sh && cp /ackee-entrypoint.sh usr/local/bin/docker-entrypoint.sh
