@@ -10,18 +10,34 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+# 
+# Keep in sync with : 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+  labels:
+    name: mongo
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017
+  clusterIP: None
+  selector:
+    role: mongo
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: mongo-ackee
+  name: mongo
 spec:
   serviceName: "mongo"
   replicas: 3
   template:
     metadata:
       labels:
-        role: mongo-ackee
+        role: mongo
         environment: test
     spec:
       terminationGracePeriodSeconds: 10
@@ -38,7 +54,7 @@ spec:
           ports:
             - containerPort: 27017
           volumeMounts:
-            - name: mongo-persistent-storage
+            - name: mongo-persistent-storage-pvc
               mountPath: /data/db
         - name: mongo-sidecar
           image: cvallance/mongo-k8s-sidecar
@@ -47,7 +63,7 @@ spec:
               value: "role=mongo,environment=test"
   volumeClaimTemplates:
   - metadata:
-      name: mongo-persistent-storage
+      name: mongo-persistent-storage-pvc
       annotations:
         volume.beta.kubernetes.io/storage-class: "fast"
     spec:
@@ -63,17 +79,3 @@ metadata:
 provisioner: kubernetes.io/gce-pd
 parameters:
   type: pd-ssd
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mongo-ackee
-  labels:
-    name: mongo-ackee
-spec:
-  ports:
-  - port: 27017
-    targetPort: 27017
-  clusterIP: None
-  selector:
-    role: mongo-ackee
